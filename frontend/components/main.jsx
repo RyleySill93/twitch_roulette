@@ -63,8 +63,8 @@ class Main extends React.Component {
     return (
       <div className="main">
         <div className="triangle-up-right">
-          
         </div>
+        <i className="fa fa-github" id="git" aria-hidden="true"></i>
         <div className="sidebar">
           <div className="logo">
             Twitch Roulette
