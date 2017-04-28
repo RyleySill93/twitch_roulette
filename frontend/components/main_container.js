@@ -1,13 +1,15 @@
 import { connect } from 'react-redux';
 import Main from './main';
-import { requestChannels } from '../actions/channel_actions';
+import { requestChannels, requestTopGames } from '../actions/channel_actions';
 
 const mapStateToProps = state => ({
-  channel: state.channel
+  channel: state.channel,
+  games: state.games
 });
 
 const mapDispatchToProps = dispatch => ({
-  requestChannels: () => dispatch(requestChannels())
+  requestChannels: () => dispatch(requestChannels()),
+  requestTopGames: () => dispatch(requestTopGames())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Main);

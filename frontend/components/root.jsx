@@ -13,7 +13,6 @@ class Root extends React.Component {
       <Provider store={this.props.store} >
         <MainContainer />
       </Provider>
-
     );
   }
 

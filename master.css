@@ -6,6 +6,7 @@ body {
   min-height: 100%;
   flex-grow: 1;
   margin: 0px;
+  font-family: Baloo;
 }
 
 html {
@@ -20,6 +21,39 @@ img {
 #root {
   width: 100%;
   height: 100%;
+}
+
+.title {
+  color: #433f4a;
+  border-bottom: 2px solid #dad8de;
+  width: 720px;
+}
+
+.search-box {
+  background-color: #201C2B;
+  border: 1px solid #392E5C;
+  width: 200px;
+  height: 30px;
+  align-self: center;
+  align-items: center;
+  display: flex;
+}
+
+.magnifying-glass {
+  width: 30px;
+  height: 30px;
+  color: #fff;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+
+.search-input {
+  border: none;
+  background-color: transparent;
+  outline: none;
+  color: #fff;
+  font-size: 12px;
 }
 
 .content {
@@ -40,22 +74,16 @@ img {
   font-family: 'Baloo';
 }
 
-.header h1 {
-  z-index: 1;
-  color: #fff;
-  margin-left: 20px;
-  font-family: 'Dimitri Swank';
-  font-size: 70px;
-}
-
 .header img {
   position: absolute;
 }
 
-#logo {
-  height: 100px;
-  width: auto;
-  margin-left: 25px;
+.logo {
+  color: #fff;
+  font-family: 'Dimitri Swank';
+  font-size: 26px;
+  margin: 16px auto;
+  text-align: center;
 }
 
 .main {
@@ -70,7 +98,7 @@ img {
   width: 200px;
   text-align: center;
   background-color: #efeef1;
-  color: #19171c;
+  color: #433f4a;
   border: 5px solid #e6544a;
   box-shadow: 0 10px #ca271c;
   cursor: pointer;
@@ -81,7 +109,9 @@ img {
 
 .sidebar {
   width: 240px;
-  background-color: #433f4a;
+  background-color: #17141f;
+  flex-direction: column;
+  display: flex;
 }
 
 .button:hover {
