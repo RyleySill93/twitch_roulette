@@ -27,6 +27,7 @@ img {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  flex-grow: 1;
 }
 
 .header {
@@ -58,7 +59,8 @@ img {
 }
 
 .main {
-  flex-direction: column;
+  display: flex;
+  min-height: 100%;
 }
 
 .button {
@@ -75,6 +77,11 @@ img {
   font-size: 24px;
   font-family: Baloo;
   outline: none;
+}
+
+.sidebar {
+  width: 240px;
+  background-color: #433f4a;
 }
 
 .button:hover {
