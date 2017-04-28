@@ -4,17 +4,21 @@ class Main extends React.Component {
   constructor (props) {
     super(props);
     this.getNewChannel = this.getNewChannel.bind(this);
-    this.state = {channel: 'wintergaming', muted: false};
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.state = {channel: 'wintergaming',
+                  muted: false,
+                  game: 'dota-2',
+                  searchTerm: ''};
   }
 
   getNewChannel () {
-    this.props.requestChannels();
+    this.props.requestChannels(this.state.game);
   }
 
   componentWillReceiveProps (nextProps) {
     if (this.props.channel.name !== nextProps.channel.name) {
-      console.log(this.props.channel);
-
       this.setState({channel: nextProps.channel.name});
     }
   }
@@ -24,12 +28,43 @@ class Main extends React.Component {
     this.getNewChannel();
   }
 
+  gamesList () {
+    return this.props.games.map(thing =>
+      <li className="game-list-item"
+          key={thing.game.name}
+          onClick={this.handleClick}
+          id={thing.game.name}>
+        <img src={thing.game.box.small}  />
+        <div>{thing.game.name}</div>
+      </li>
+    );
+  }
+
+  handleSubmit (e) {
+    e.preventDefault();
+    this.props.requestSearchedGames(this.state.searchTerm);
+  }
+
+  handleClick (e) {
+    e.preventDefault();
+    this.setState({searchTerm: e.currentTarget.id});
+    this.getNewChannel();
+  }
+
+  handleChange (e) {
+    e.preventDefault();
+    this.setState({ searchTerm: e.target.value });
+  }
+
   render () {
 
     const { channel } = this.props;
 
     return (
       <div className="main">
+        <div className="triangle-up-right">
+          
+        </div>
         <div className="sidebar">
           <div className="logo">
             Twitch Roulette
@@ -38,7 +73,12 @@ class Main extends React.Component {
             <div className="magnifying-glass">
               <i className="fa fa-search" aria-hidden="true"></i>
             </div>
-            <input type="text" placeholder="Search games" className="search-input"></input>
+            <form onSubmit={this.handleSubmit}>
+              <input type="text" placeholder="Search games" onChange={this.handleChange} className="search-input" value={this.state.searchTerm}></input>
+            </form>
+          </div>
+          <div className="games-list">
+            {this.gamesList()}
           </div>
         </div>
         <div className="content">
@@ -53,7 +93,7 @@ class Main extends React.Component {
             scrolling="no"
             allowFullScreen="true">
           </iframe>
-          <button className="button" onClick={this.getNewChannel}>random</button>
+          <button className="button" onClick={this.getNewChannel}>RANDOM</button>
         </div>
       </div>
     );

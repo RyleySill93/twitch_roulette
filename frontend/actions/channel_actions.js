@@ -1,23 +1,29 @@
 export const RECEIVE_CHANNEL = 'RECEIVE_CHANNEL';
-export const RECEIVE_TOP_GAMES = 'RECEIVE_TOP_GAMES';
-import { fetchChannels, fetchTopGames } from '../util/channel_api_util';
+export const RECEIVE_GAMES = 'RECEIVE_GAMES';
+import { fetchChannels, fetchTopGames, fetchGames } from '../util/channel_api_util';
 
 export const receiveChannel = (channel) => ({
   type: RECEIVE_CHANNEL,
   channel
 });
 
-export const receiveTopGames = (games) => ({
-  type: RECEIVE_TOP_GAMES,
+export const receiveGames = (games) => ({
+  type: RECEIVE_GAMES,
   games
 });
 
-export const requestChannels = () => dispatch => (
-  fetchChannels().then(channels =>
+export const requestChannels = game => dispatch => (
+  fetchChannels(game).then(channels =>
     dispatch(receiveChannel(channels.data.streams[Math.floor(Math.random() * 10)].channel)))
 );
 
 export const requestTopGames = () => dispatch => (
   fetchTopGames().then(games =>
-    dispatch(receiveTopGames(games.data.top)))
+    dispatch(receiveGames(games.data.top)))
+);
+
+export const requestSearchedGames = (searchTerm) => dispatch => (
+  fetchGames(searchTerm).then(games =>
+    dispatch(receiveGames(games.data.games)))
+    .catch(res => console.log('failed:', res))
 );
