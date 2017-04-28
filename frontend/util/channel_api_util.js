@@ -3,7 +3,7 @@ import axios from 'axios';
 export const fetchChannels = game => (
   axios({
     method: 'get',
-    url: `https://api.twitch.tv/kraken/search/streams?query=${game.toLowerCase().split(" ").join("-")}`,
+    url: `https://api.twitch.tv/kraken/search/streams?&limit=10&query=${game.toLowerCase().split(" ").join("-")}`,
     headers: {'Client-ID': 'wxk4qnqg3ajyzh9p2u1dx398ehud5f'}
   })
 );

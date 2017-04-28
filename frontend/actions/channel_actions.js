@@ -14,7 +14,7 @@ export const receiveGames = (games) => ({
 
 export const requestChannels = game => dispatch => (
   fetchChannels(game).then(channels =>
-    dispatch(receiveChannel(channels.data.streams[Math.floor(Math.random() * 10)].channel)))
+    dispatch(receiveChannel(channels.data.streams[Math.floor(Math.random() * channels.data.streams.length - 1)].channel)))
 );
 
 export const requestTopGames = () => dispatch => (

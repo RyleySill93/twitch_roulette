@@ -37,18 +37,20 @@ img {
 }
 
 .game-list-item {
-  color: #fff;
+  color: #dad8de;
   list-style: none;
   display: flex;
   align-items: center;
-  margin: 0px 10px;
+  margin: 0px;
   padding: 8px 10px;
   border-radius: 4px;
   cursor: pointer;
   font-family: Dosis;
+  transition: color 0.1s, background-color 0.1s;
 }
 
 .game-list-item:hover {
+  color: #fff;
   background-color: #201C2B;
 }
 
@@ -126,6 +128,13 @@ img {
   min-height: 100%;
 }
 
+.sidebar {
+  width: 240px;
+  background-color: #17141f;
+  flex-direction: column;
+  display: flex;
+}
+
 .button {
   border-radius: 3px;
   margin-top: 30px;
@@ -140,13 +149,7 @@ img {
   font-size: 24px;
   font-family: Baloo;
   outline: none;
-}
-
-.sidebar {
-  width: 240px;
-  background-color: #17141f;
-  flex-direction: column;
-  display: flex;
+  transition: transform 0.1s, box-shadow 0.1s;
 }
 
 .button:hover {
@@ -154,6 +157,7 @@ img {
   color: #e6544a;
   box-shadow: 0 8px #ca271c;
   transform: translateY(2px);
+  /*transition: transform 0.1s;*/
 }
 
 .button:active {
