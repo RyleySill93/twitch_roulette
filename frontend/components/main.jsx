@@ -48,6 +48,7 @@ class Main extends React.Component {
   handleClick (e) {
     e.preventDefault();
     this.setState({searchTerm: e.currentTarget.id});
+    this.state.game = e.currentTarget.id;
     this.getNewChannel();
   }
 

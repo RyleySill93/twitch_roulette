@@ -1,8 +1,9 @@
 import axios from 'axios';
 
-const checkChannels = (game, streams, currentOffset = 250, lowerBound = 0, upperBound = 500) => {
+const checkChannels = (game, streams, currentOffset = 1000, lowerBound = 0, upperBound = 1000) => {
   console.log('checking channels', currentOffset, lowerBound, upperBound);
   let viewerCount = streams && streams[0] ? streams[0].viewers : null;
+  console.log('viewer count', viewerCount);
   if (viewerCount && viewerCount <= 5) {
     return axios({
       method: 'get',
@@ -15,10 +16,12 @@ const checkChannels = (game, streams, currentOffset = 250, lowerBound = 0, upper
   }
   // let rand = Math.floor(Math.random() * (upperBound - lowerBound));
   if (viewerCount === null) {
+    console.log('viewer count too small', currentOffset);
     upperBound = currentOffset;
     // console.log(rand);
     // currentOffset = currentOffset - rand;
   } else {
+    console.log('viewer count too big', currentOffset);
     lowerBound = currentOffset;
     // currentOffset = currentOffset + rand;
   }
