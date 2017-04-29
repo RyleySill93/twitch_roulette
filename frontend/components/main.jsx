@@ -9,7 +9,7 @@ class Main extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.state = {channel: 'wintergaming',
                   muted: false,
-                  game: 'dota-2',
+                  game: 'persona-5',
                   searchTerm: ''};
   }
 
