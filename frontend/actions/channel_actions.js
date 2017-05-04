@@ -14,16 +14,15 @@ export const receiveGames = (games) => ({
 
 export const requestChannels = game => dispatch => {
   return fetchChannels(game).then(channels => {
-    const idx = Math.floor(Math.random() * (channels.data.streams.length - 1));
-    console.log(idx);
-    console.log(channels.data.streams);
+    const size = channels.data.streams.length - 1;
+    const idx = Math.floor(Math.random() * size);
     return dispatch(receiveChannel(channels.data.streams[idx].channel));
   });
 };
 
 export const requestTopGames = () => dispatch => (
   fetchTopGames().then(games =>
-    dispatch(receiveGames(games.data.top)))
+    dispatch(receiveGames(games.data.top.map(top => top.game))))
 );
 
 export const requestSearchedGames = (searchTerm) => dispatch => (

@@ -35,13 +35,13 @@ class Main extends React.Component {
   }
 
   gamesList () {
-    return this.props.games.map(thing =>
+    return this.props.games.map(game =>
       <li className="game-list-item"
-          key={thing.game.name}
+          key={game.name}
           onClick={this.handleClick}
-          id={thing.game.name}>
-        <img src={thing.game.box.small}  />
-        <div>{thing.game.name}</div>
+          id={game.name}>
+        <img src={game.box.small}  />
+        <div>{game.name}</div>
       </li>
     );
   }
