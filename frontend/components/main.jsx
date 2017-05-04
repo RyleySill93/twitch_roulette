@@ -80,18 +80,20 @@ class Main extends React.Component {
   content () {
     return (
       <div className="content">
-        <h1 className="title">
-          {this.props.channel.game} - {this.props.channel.name}
-        </h1>
+        <div className="header">
+          <div className="title">
+            {this.props.channel.game} - {this.props.channel.name || 'Unknown'}
+          </div>
+          <button className="button" onClick={this.getNewChannel}>RANDOM</button>
+        </div>
         <iframe
           src={`http://player.twitch.tv/?channel=${this.state.channel}&muted=${this.state.muted}`}
-          height="405"
-          width="720"
+          height="506"
+          width="900"
           frameBorder="0"
           scrolling="no"
           allowFullScreen="true">
         </iframe>
-        <button className="button" onClick={this.getNewChannel}>RANDOM</button>
       </div>
     );
   }
