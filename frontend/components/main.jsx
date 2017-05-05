@@ -4,21 +4,15 @@ class Main extends React.Component {
   constructor (props) {
     super(props);
     this.getNewChannel = this.getNewChannel.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.searchGames = this.searchGames.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.mainLoader = this.mainLoader.bind(this);
-    this.buttonLoader = this.buttonLoader.bind(this);
     this.content = this.content.bind(this);
     this.state = {channel: 'twitch',
                   muted: false,
                   game: 'all',
                   searchTerm: ''};
-  }
-
-  getNewChannel () {
-    this.props.requestChannels(this.state.game);
-    this.props.receiveLoadingState('loading');
   }
 
   componentWillReceiveProps (nextProps) {
@@ -34,21 +28,14 @@ class Main extends React.Component {
     this.props.receiveLoadingState('loading');
   }
 
-  gamesList () {
-    return this.props.games.map(game =>
-      <li className="game-list-item"
-          key={game.name}
-          onClick={this.handleClick}
-          id={game.name}>
-        <img src={game.box.small}  />
-        <div>{game.name}</div>
-      </li>
-    );
-  }
-
-  handleSubmit (e) {
+  searchGames (e) {
     e.preventDefault();
     this.props.requestSearchedGames(this.state.searchTerm);
+  }
+
+  getNewChannel () {
+    this.props.requestChannels(this.state.game);
+    this.props.receiveLoadingState('loading');
   }
 
   handleClick (e) {
@@ -63,6 +50,18 @@ class Main extends React.Component {
     this.setState({ searchTerm: e.target.value });
   }
 
+  gamesList () {
+    return this.props.games.map(game =>
+      <li className="game-list-item"
+          key={game.name}
+          onClick={this.handleClick}
+          id={game.name}>
+        <img src={game.box.small}  />
+        <div>{game.name}</div>
+      </li>
+    );
+  }
+
   mainLoader () {
     return (
       <div className='mainLoader'>
@@ -70,19 +69,14 @@ class Main extends React.Component {
     );
   }
 
-  buttonLoader () {
-    return (
-      <div className='buttonLoader'>
-      </div>
-    );
-  }
-
   content () {
+    const { channel } = this.props;
     return (
       <div className="content">
         <div className="header">
           <div className="title">
-            {this.props.channel.game} - {this.props.channel.name || 'Unknown'}
+            {channel.game && channel.game.length > 0 ? channel.game : 'Unknown'}
+            &nbsp;- {channel.name}
           </div>
           <button className="button" onClick={this.getNewChannel}>RANDOM</button>
         </div>
@@ -115,8 +109,12 @@ class Main extends React.Component {
             <div className="magnifying-glass">
               <i className="fa fa-search" aria-hidden="true"></i>
             </div>
-            <form onSubmit={this.handleSubmit}>
-              <input type="text" placeholder="Search games" onChange={this.handleChange} className="search-input" value={this.state.searchTerm}></input>
+            <form onSubmit={this.searchGames}>
+              <input type="text"
+                     placeholder="Search games"
+                     onChange={this.handleChange}
+                     className="search-input"
+                     value={this.state.searchTerm}></input>
             </form>
           </div>
           <div className="games-list">
