@@ -100,7 +100,9 @@ class Main extends React.Component {
       <div className="main">
         <div className="triangle-up-right">
         </div>
-        <i className="fa fa-github" id="git" aria-hidden="true"></i>
+        <a href="https://github.com/RyleySill93/twitch_roulette" target="_blank">
+          <i className="fa fa-github" id="git" aria-hidden="true"></i>
+        </a>
         <div className="sidebar">
           <div className="logo">
             Twitch Roulette
