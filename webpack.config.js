@@ -3,7 +3,7 @@ var path = require('path');
 module.exports = {
   entry: './frontend/twitch_roulette.jsx',
   output: {
-    filename: './hi.js',
+    filename: './bundle.js',
   },
   module: {
     loaders: [
