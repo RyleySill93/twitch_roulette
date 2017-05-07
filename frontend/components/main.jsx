@@ -81,7 +81,7 @@ class Main extends React.Component {
           <button className="button" onClick={this.getNewChannel}>RANDOM</button>
         </div>
         <iframe
-          src={`https://player.twitch.tv/?channel=${this.state.channel}&muted=${this.state.muted}`}
+          src={`htt://player.twitch.tv/?channel=${this.state.channel}&muted=${this.state.muted}`}
           height="506"
           width="900"
           frameBorder="0"
