@@ -1,6 +1,9 @@
 import React from 'react';
 
 import Content from './content';
+import Sidebar from './sidebar';
+
+const LOADING = 'LOADING';
 
 class Main extends React.Component {
   constructor (props) {
@@ -25,7 +28,7 @@ class Main extends React.Component {
   componentWillMount () {
     this.props.requestTopGames();
     this.getNewChannel();
-    this.props.receiveLoadingState('loading');
+    this.props.receiveLoadingState(LOADING);
   }
 
   searchGames (e) {
@@ -35,13 +38,13 @@ class Main extends React.Component {
 
   getNewChannel () {
     this.props.requestChannels(this.state.game);
-    this.props.receiveLoadingState('loading');
+    this.props.receiveLoadingState(LOADING);
   }
 
   handleClick (e) {
     e.preventDefault();
     this.state.game = e.currentTarget.id;
-    this.props.receiveLoadingState('loading');
+    this.props.receiveLoadingState(LOADING);
     this.getNewChannel();
   }
 
@@ -50,21 +53,9 @@ class Main extends React.Component {
     this.setState({ searchTerm: e.target.value });
   }
 
-  gamesList () {
-    return this.props.games.map(game =>
-      <li className="game-list-item"
-          key={game.name}
-          onClick={this.handleClick}
-          id={game.name}>
-        <img src={game.box.small}  />
-        <div>{game.name}</div>
-      </li>
-    );
-  }
-
-  mainLoader () {
+  loader () {
     return (
-      <div className='mainLoader'>
+      <div className='loader'>
       </div>
     );
   }
@@ -79,8 +70,7 @@ class Main extends React.Component {
   }
 
   render () {
-
-    const { channel } = this.props;
+    const { channel, loadingState } = this.props;
 
     return (
       <div className="main">
@@ -89,34 +79,12 @@ class Main extends React.Component {
         <a href="https://github.com/RyleySill93/twitch_roulette" target="_blank">
           <i className="fa fa-github" id="git" aria-hidden="true"></i>
         </a>
-        <div className="sidebar">
-          <div className="logo">
-            Twitch Roulette
-          </div>
-          <div className="search-box">
-            <div className="magnifying-glass">
-              <i className="fa fa-search" aria-hidden="true"></i>
-            </div>
-            <form onSubmit={this.searchGames}>
-              <input type="text"
-                     placeholder="Search games"
-                     onChange={this.handleChange}
-                     className="search-input"
-                     value={this.state.searchTerm}></input>
-            </form>
-          </div>
-          <div className="games-list">
-            <li className="game-list-item"
-                key='all'
-                onClick={this.handleClick}
-                id='all'>
-              <div id="all-games"><i className="fa fa-twitch" aria-hidden="true"></i></div>
-              <div>All Games</div>
-            </li>
-            {this.gamesList()}
-          </div>
-        </div>
-        {this.props.loadingState === 'loading' ? this.mainLoader() : this.content()}
+        <Sidebar searchGames={this.searchGames}
+                 handleChange={this.handleChange}
+                 handleClick={this.handleClick}
+                 searchTerm={this.state.searchTerm}
+                 games={this.props.games}/>
+               {loadingState === LOADING ? this.loader() : this.content()}
       </div>
     );
   }
