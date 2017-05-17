@@ -41,7 +41,7 @@ const Sidebar = (props) => {
           </div>
           <div>All Games</div>
         </li>
-        {gamesList(games)}
+        {gamesList(games, handleClick)}
       </div>
     </div>
   );

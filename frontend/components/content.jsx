@@ -20,7 +20,7 @@ const Content = (props) => {
         allowFullScreen="true">
       </iframe>
     </div>
-  )
+  );
 };
 
 export default Content;

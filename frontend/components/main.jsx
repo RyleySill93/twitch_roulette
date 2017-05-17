@@ -84,7 +84,7 @@ class Main extends React.Component {
                  handleClick={this.handleClick}
                  searchTerm={this.state.searchTerm}
                  games={this.props.games}/>
-               {loadingState === LOADING ? this.loader() : this.content()}
+        {loadingState === LOADING ? this.loader() : this.content()}
       </div>
     );
   }
