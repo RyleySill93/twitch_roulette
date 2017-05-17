@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Content from './content';
+
 class Main extends React.Component {
   constructor (props) {
     super(props);
@@ -7,8 +9,6 @@ class Main extends React.Component {
     this.searchGames = this.searchGames.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.mainLoader = this.mainLoader.bind(this);
-    this.content = this.content.bind(this);
     this.state = {channel: 'twitch',
                   muted: false,
                   game: 'all',
@@ -72,23 +72,9 @@ class Main extends React.Component {
   content () {
     const { channel } = this.props;
     return (
-      <div className="content">
-        <div className="header">
-          <div className="title">
-            {channel.game && channel.game.length > 0 ? channel.game : 'Unknown'}
-            &nbsp;- {channel.name}
-          </div>
-          <button className="button" onClick={this.getNewChannel}>RANDOM</button>
-        </div>
-        <iframe
-          src={`//player.twitch.tv/?&channel=${this.state.channel}&muted=${this.state.muted}`}
-          height="506"
-          width="900"
-          frameBorder="0"
-          scrolling="no"
-          allowFullScreen="true">
-        </iframe>
-      </div>
+      <Content channel={channel}
+               state={this.state}
+               getNewChannel={this.getNewChannel} />
     );
   }
 
