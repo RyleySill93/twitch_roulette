@@ -71,7 +71,6 @@ class Main extends React.Component {
 
   render () {
     const { channel, loadingState } = this.props;
-
     return (
       <div className="main">
         <div className="triangle-up-right">
