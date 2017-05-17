@@ -12,20 +12,21 @@ export const receiveGames = (games) => ({
   games
 });
 
-export const requestChannels = game => dispatch => {
+export const requestChannels = (game) => (dispatch) => {
   return fetchChannels(game).then(channels => {
-    const size = channels.data.streams.length - 1;
+    const streams = channels.data.streams;
+    const size = streams.length - 1;
     const idx = Math.floor(Math.random() * size);
-    return dispatch(receiveChannel(channels.data.streams[idx].channel));
+    return dispatch(receiveChannel(streams[idx].channel));
   });
 };
 
-export const requestTopGames = () => dispatch => (
+export const requestTopGames = () => (dispatch) => (
   fetchTopGames().then(games =>
     dispatch(receiveGames(games.data.top.map(top => top.game))))
 );
 
-export const requestSearchedGames = (searchTerm) => dispatch => (
+export const requestSearchedGames = (searchTerm) => (dispatch) => (
   fetchGames(searchTerm).then(games =>
     dispatch(receiveGames(games.data.games)))
     .catch(res => console.log('failed:', res))
